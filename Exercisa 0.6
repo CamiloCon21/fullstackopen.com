@@ -1,0 +1,37 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/
+    activate server
+    server-->>browser: HTML document
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/kuva.png
+    activate server
+    server-->>browser: the .png file
+    deactivate server
+
+    browser->>server: https://studies.cs.helsinki.fi/exampleapp/spa
+    activate server
+    server-->>browser: click button
+    deactivate server
+
+    graph LR
+    subgraph Browser
+    b((User))
+    b -->|Escribe en el campo de texto y hace clic en Save| b1(Enviar nueva nota)
+    end
+
+    subgraph Server
+    s((Server))
+    end
+
+    subgraph Database
+    d((Database))
+    end
+
+    b1 -->|POST /new_note| s
+    s -->|Guarda la nueva nota en la base de datos| d
+    d -->|Respuesta OK| s
+    s -->|Envía respuesta al navegador| b1
