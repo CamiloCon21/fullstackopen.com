@@ -1,14 +1,19 @@
 sequenceDiagram
-    participant user(person)
-    participant Browser
-    participant Server
-    participant Database
 
-    User->>Browser: Completa formulario de contacto y envía (complete the formulary and send)
-    Browser->>Server: POST /contact
-    activate Server
-    Server->>Database: Guarda datos del formulario (save the formulary)
-    Database-->>Server: Datos guardados (save)
-    Server-->>Browser: Respuesta OK (status 200)
-    deactivate Server
-    Browser-->>User: Mostrar mensaje de confirmación (activate message of confirmation)
+    subgraph Browser
+    b((User))
+    b -->|write in this textbos and click the button Save| b1(Send new note)
+    end
+
+    subgraph Server
+    s((Server))
+    end
+
+    subgraph Database
+    d((Database))
+    end
+
+    b1 -->|POST /new_note| s
+    s -->|save the no the in the DBA| d
+    d -->|Response OK| s
+    s -->|Send the response to browser| b1
