@@ -1,0 +1,20 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/
+    activate server
+    server-->>browser: HTML document
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/kuva.png
+    activate server
+    server-->>browser: the .png file
+    deactivate server
+
+    browser->>server: https://studies.cs.helsinki.fi/exampleapp/spa
+    activate server
+    server-->>browser: click button
+    deactivate server
+
+   
