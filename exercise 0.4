@@ -1,0 +1,14 @@
+sequenceDiagram
+    participant user(person)
+    participant Browser
+    participant Server
+    participant Database
+
+    User->>Browser: Completa formulario de contacto y envía (complete the formulary and send)
+    Browser->>Server: POST /contact
+    activate Server
+    Server->>Database: Guarda datos del formulario (save the formulary)
+    Database-->>Server: Datos guardados (save)
+    Server-->>Browser: Respuesta OK (status 200)
+    deactivate Server
+    Browser-->>User: Mostrar mensaje de confirmación (activate message of confirmation)
